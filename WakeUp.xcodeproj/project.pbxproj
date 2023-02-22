@@ -11,6 +11,7 @@
 		4D25D70429A645DC00FC4ACE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25D70329A645DC00FC4ACE /* ContentView.swift */; };
 		4D25D70629A645DD00FC4ACE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D25D70529A645DD00FC4ACE /* Assets.xcassets */; };
 		4D25D70929A645DD00FC4ACE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D25D70829A645DD00FC4ACE /* Preview Assets.xcassets */; };
+		4D25D71029A6485B00FC4ACE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25D70F29A6485B00FC4ACE /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		4D25D70329A645DC00FC4ACE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4D25D70529A645DD00FC4ACE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D25D70829A645DD00FC4ACE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4D25D70F29A6485B00FC4ACE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		4D25D70029A645DC00FC4ACE /* WakeUp */ = {
 			isa = PBXGroup;
 			children = (
+				4D25D70F29A6485B00FC4ACE /* MapView.swift */,
 				4D25D70129A645DC00FC4ACE /* WakeUpApp.swift */,
 				4D25D70329A645DC00FC4ACE /* ContentView.swift */,
 				4D25D70529A645DD00FC4ACE /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D25D70429A645DC00FC4ACE /* ContentView.swift in Sources */,
+				4D25D71029A6485B00FC4ACE /* MapView.swift in Sources */,
 				4D25D70229A645DC00FC4ACE /* WakeUpApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +271,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WakeUp/Preview Content\"";
+				DEVELOPMENT_TEAM = UAGFLN8NLA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -295,6 +300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WakeUp/Preview Content\"";
+				DEVELOPMENT_TEAM = UAGFLN8NLA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
