@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var selectedTime : String = "5분"
     @State private var selectedType : String = "소리"
     @State private var showStations = false
+    @ObservedObject var selectedStation = selectedStationVM()
+    @State private var selectedStationText = "도착역을 지정해주세요"
     var timeArray = ["5분","10분","15분","20분","25분","30분"]
     var alertTypeArray = ["소리", "진동"]
     var body: some View {
@@ -30,13 +32,9 @@ struct ContentView: View {
                             }
                         }
                         .opacity(fadeIn ? 1 : 0)
-                    ZStack(alignment: .leading){
-                        MapView()
-                        Button("현재 위치",action:{})
-                            .buttonStyle(viewTitleButtonStyle())
-                    }
+                    MapView()
                     HStack{
-                        Button("도착역을 지정해주세요", action:{self.showStations.toggle()})
+                        Button(selectedStationText, action:{self.showStations.toggle()})
                             .buttonStyle(inputButtonStyle())
                             .overlay(Image(systemName: "train.side.front.car")
                                 .font(.system(size:25))
@@ -57,7 +55,7 @@ struct ContentView: View {
                             .font(.system(size:12))
                             .foregroundColor(Color("lineColor"))
                         
-                        Text("소리와 진동, 어떻게 깨워드릴까요?")
+                        Text("어떻게 깨워드릴까요?")
                             .font(.system(size: 25, weight: .heavy))
                             .padding()
                         Picker("choose alert type", selection: $selectedType){
@@ -75,8 +73,14 @@ struct ContentView: View {
                 }
                 .padding()
                 
-                .sheet(isPresented: $showStations){
-                    StationView()
+                .sheet(isPresented: $showStations, onDismiss: {
+                    if selectedStation.get().count>0 {
+                        self.selectedStationText = selectedStation.get()[0].name
+//                        self.destination.setDestination(_name: selStation.get()[0].name, _coordinate: CLLocationCoordinate2D(latitude : selStation.get()[0].lat, longitude : selStation.get()[0].lng))
+//                        self.destinationNameLbl = self.destination.getDestinationName()
+                    }
+                }){
+                    StationView(selectedStation: selectedStation)
                 }
             }
             .onAppear{
@@ -91,23 +95,6 @@ struct ContentView: View {
     }
 }
 
-struct viewTitleButtonStyle : ButtonStyle{
-    var labelColor = Color.white
-    var backgroundColor = Color("viewTitleButtonColor")
-      
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal,10)
-            .padding(.vertical,5)
-            .foregroundColor(labelColor)
-            .background(Capsule().fill(backgroundColor))
-            .font(.system(size: 15))
-            .frame(width: 80,height:50)
-            .offset(x: 0, y: -80)
-            .opacity(0.8)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1)
-    }
-}
 
 struct inputButtonStyle : ButtonStyle{
     func makeBody(configuration: Configuration) -> some View {
