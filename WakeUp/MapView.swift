@@ -19,18 +19,22 @@ struct MapView: View {
                 MapMarker(coordinate: pin.location.coordinate, tint: .red)
             }
                 .frame(maxWidth: .infinity, maxHeight: 200)
-            Button("현재 위치",action:{
-                managerDelegate.updateLocation()
-            })
-                .buttonStyle(viewTitleButtonStyle())
+            Image(systemName: "location.circle.fill")
+                .onTapGesture{
+                    managerDelegate.updateLocation()
+                }
+                .foregroundColor(Color("lineColor"))
+                .font(.system(size : 30))
+                .offset(x: 150, y: 70)
+                .opacity(0.7)
                 
         }
         .cornerRadius(15)
         .onAppear{
             manager.delegate = managerDelegate
-            let timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-                managerDelegate.updateLocation()
-            }
+//            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+//                managerDelegate.updateLocation()
+//            }
         }
     }
 }

@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var selectedStationText = "도착역을 지정해주세요"
     var timeArray = ["5분","10분","15분","20분","25분","30분"]
     var alertTypeArray = ["소리", "진동"]
+    @State private var toast: FancyToast? = nil
     var body: some View {
         NavigationView{
             ZStack(alignment: .bottom){
@@ -66,9 +67,13 @@ struct ContentView: View {
                         .pickerStyle(.segmented)
                     }
                     Spacer()
-                    Button("시작", action:{})
-                        .buttonStyle(startButtonStyle())
-                        .padding()
+                    Button("시작", action:{
+                        if selectedStation.get().count==0{
+                            toast = FancyToast(type: .info, title: "Info", message: "도착역을 지정해주세요")
+                        }
+                    })
+                    .buttonStyle(startButtonStyle())
+                    .padding()
                     Spacer()
                 }
                 .padding()
@@ -89,6 +94,7 @@ struct ContentView: View {
                 })
             }
             .ignoresSafeArea(.all)
+            .toastView(toast: $toast)
             
         }
         
@@ -98,7 +104,6 @@ struct ContentView: View {
 
 struct inputButtonStyle : ButtonStyle{
     func makeBody(configuration: Configuration) -> some View {
-        
         configuration.label
             .frame(width: 300, height: 50)
             .font(.system(size:20,weight: .heavy))

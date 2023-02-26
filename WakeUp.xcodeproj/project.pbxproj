@@ -14,6 +14,8 @@
 		4D25D71029A6485B00FC4ACE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25D70F29A6485B00FC4ACE /* MapView.swift */; };
 		4D65C07B29AA2FEC00BF0DC5 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65C07A29AA2FEC00BF0DC5 /* StationView.swift */; };
 		4D65C07D29AA318F00BF0DC5 /* StationJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D65C07C29AA318F00BF0DC5 /* StationJSON.json */; };
+		4DD3913C29AB989A0006CFA4 /* FancyToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3913B29AB989A0006CFA4 /* FancyToastView.swift */; };
+		4DD3913E29AB9CA40006CFA4 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3913D29AB9CA40006CFA4 /* WaitingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		4D25D70F29A6485B00FC4ACE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		4D65C07A29AA2FEC00BF0DC5 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		4D65C07C29AA318F00BF0DC5 /* StationJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = StationJSON.json; path = WakeUp/StationJSON.json; sourceTree = SOURCE_ROOT; };
+		4DD3913B29AB989A0006CFA4 /* FancyToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyToastView.swift; sourceTree = "<group>"; };
+		4DD3913D29AB9CA40006CFA4 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 		4D25D70029A645DC00FC4ACE /* WakeUp */ = {
 			isa = PBXGroup;
 			children = (
+				4DD3913D29AB9CA40006CFA4 /* WaitingView.swift */,
+				4DD3913B29AB989A0006CFA4 /* FancyToastView.swift */,
 				4D65C07C29AA318F00BF0DC5 /* StationJSON.json */,
 				4D65C07A29AA2FEC00BF0DC5 /* StationView.swift */,
 				4D25D70F29A6485B00FC4ACE /* MapView.swift */,
@@ -148,6 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D25D70429A645DC00FC4ACE /* ContentView.swift in Sources */,
+				4DD3913C29AB989A0006CFA4 /* FancyToastView.swift in Sources */,
+				4DD3913E29AB9CA40006CFA4 /* WaitingView.swift in Sources */,
 				4D65C07B29AA2FEC00BF0DC5 /* StationView.swift in Sources */,
 				4D25D71029A6485B00FC4ACE /* MapView.swift in Sources */,
 				4D25D70229A645DC00FC4ACE /* WakeUpApp.swift in Sources */,
