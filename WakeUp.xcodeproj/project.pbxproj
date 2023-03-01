@@ -12,6 +12,7 @@
 		4D25D70629A645DD00FC4ACE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D25D70529A645DD00FC4ACE /* Assets.xcassets */; };
 		4D25D70929A645DD00FC4ACE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D25D70829A645DD00FC4ACE /* Preview Assets.xcassets */; };
 		4D25D71029A6485B00FC4ACE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25D70F29A6485B00FC4ACE /* MapView.swift */; };
+		4D2FCA0929AF7E3B001212A3 /* SystemSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2FCA0829AF7E3B001212A3 /* SystemSounds.swift */; };
 		4D65C07B29AA2FEC00BF0DC5 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65C07A29AA2FEC00BF0DC5 /* StationView.swift */; };
 		4D65C07D29AA318F00BF0DC5 /* StationJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D65C07C29AA318F00BF0DC5 /* StationJSON.json */; };
 		4DD3913C29AB989A0006CFA4 /* FancyToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3913B29AB989A0006CFA4 /* FancyToastView.swift */; };
@@ -25,6 +26,7 @@
 		4D25D70529A645DD00FC4ACE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D25D70829A645DD00FC4ACE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4D25D70F29A6485B00FC4ACE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		4D2FCA0829AF7E3B001212A3 /* SystemSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSounds.swift; sourceTree = "<group>"; };
 		4D65C07A29AA2FEC00BF0DC5 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		4D65C07C29AA318F00BF0DC5 /* StationJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = StationJSON.json; path = WakeUp/StationJSON.json; sourceTree = SOURCE_ROOT; };
 		4DD3913B29AB989A0006CFA4 /* FancyToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyToastView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				4D25D70329A645DC00FC4ACE /* ContentView.swift */,
 				4D25D70529A645DD00FC4ACE /* Assets.xcassets */,
 				4D25D70729A645DD00FC4ACE /* Preview Content */,
+				4D2FCA0829AF7E3B001212A3 /* SystemSounds.swift */,
 			);
 			path = WakeUp;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				4DD3913C29AB989A0006CFA4 /* FancyToastView.swift in Sources */,
 				4DD3913E29AB9CA40006CFA4 /* WaitingView.swift in Sources */,
 				4D65C07B29AA2FEC00BF0DC5 /* StationView.swift in Sources */,
+				4D2FCA0929AF7E3B001212A3 /* SystemSounds.swift in Sources */,
 				4D25D71029A6485B00FC4ACE /* MapView.swift in Sources */,
 				4D25D70229A645DC00FC4ACE /* WakeUpApp.swift in Sources */,
 			);

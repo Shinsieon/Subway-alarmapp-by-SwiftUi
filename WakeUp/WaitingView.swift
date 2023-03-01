@@ -7,12 +7,14 @@
 
 import SwiftUI
 import MapKit
+import AVFoundation
 
 struct WaitingView: View {
     @State var isAnimating: Bool = true
     @State var distance : Double = 0.0
     @State var isWaitingDone = false
     @ObservedObject var selectedStation: selectedStationVM
+    @State var selectedDistance : String
     var body: some View {
         ZStack{
             Circle()
@@ -44,6 +46,13 @@ struct WaitingView: View {
             VStack{
                 Text("\(selectedStation.get()[0].name)역까지")
                 Text("\(String(format: "%.3f", distance)) km 남았습니다")
+                Text("\(selectedDistance) 전에 깨워드릴게요")
+                    .font(.system(size:12))
+                    .foregroundColor(Color("lineColor"))
+                Toggle("alarm on", isOn: $isWaitingDone)
+                    .onChange(of: isWaitingDone) { value in
+                        AudioServicesPlaySystemSound(SystemSoundID(1322))
+                    }
             }
             .font(.system(size: 30))
         }
@@ -59,10 +68,35 @@ struct WaitingView: View {
         let curLocation = CLLocationCoordinate2D(latitude: locationInfo.get().center.latitude, longitude: locationInfo.get().center.longitude)
         let desLocation = CLLocationCoordinate2D(latitude: selectedStation.get()[0].lat, longitude: selectedStation.get()[0].lng)
         distance = Double(curLocation.distance(to : desLocation)/1000)
+        
+        var selDistance =  selectedDistance.replacingOccurrences(of: "km", with: "")
+        selDistance = selDistance.replacingOccurrences(of: "m", with: "")
+        var DselDistance = Double(selDistance)!
+        if(DselDistance > 1.5) {
+            DselDistance = DselDistance/1000
+        }
+        if(distance <= DselDistance){
+            isWaitingDone = true
+            print(isWaitingDone)
+        }
+    }
+}
+class HapticManager {
+    
+    static let instance = HapticManager()
+    
+    func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(type)
+    }
+    
+    func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred()
     }
 }
 extension CLLocationCoordinate2D {
-    
     /// Returns the distance between two coordinates in meters.
     func distance(to: CLLocationCoordinate2D) -> CLLocationDistance {
         MKMapPoint(self).distance(to: MKMapPoint(to))
@@ -72,6 +106,7 @@ extension CLLocationCoordinate2D {
 struct WaitingView_Previews: PreviewProvider {
     static var previews: some View {
         let selStation = selectedStationVM()
-        WaitingView(selectedStation: selStation)
+        let selectedDistance = "100m"
+        WaitingView(selectedStation: selStation, selectedDistance: selectedDistance)
     }
 }

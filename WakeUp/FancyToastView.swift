@@ -21,6 +21,7 @@ struct FancyToastView: View {
                 VStack(alignment: .leading) {
                     Text(title)
                         .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Color.black.opacity(0.6))
                     
                     Text(message)
                         .font(.system(size: 12))
@@ -46,7 +47,7 @@ struct FancyToastView: View {
                 .clipped()
             , alignment: .leading
         )
-        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(minWidth: 0, maxWidth: 360)
         .cornerRadius(8)
         .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 1)
         .padding(.horizontal, 16)

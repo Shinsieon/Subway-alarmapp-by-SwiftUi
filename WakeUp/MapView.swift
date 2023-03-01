@@ -17,9 +17,7 @@ struct MapView: View {
     //서울 좌표(초기값)
     var body: some View {
         ZStack{
-            Map(coordinateRegion: $managerDelegate.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: $tracking, annotationItems: managerDelegate.pins){ pin in
-                MapMarker(coordinate: pin.location.coordinate, tint: .red)
-            }
+            AreaMap(region : $managerDelegate.region)
                 .frame(maxWidth: .infinity, maxHeight: 200)
             Image(systemName: "location.circle.fill")
                 .onTapGesture{
@@ -34,13 +32,29 @@ struct MapView: View {
         .cornerRadius(15)
         .onAppear{
             manager.delegate = managerDelegate
-            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-                managerDelegate.updateLocation()
-            }
+//            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+//                managerDelegate.updateLocation()
+//            }
         }
         .onDisappear{
             //Timer.invalidate()
         }
+    }
+}
+struct AreaMap: View {
+    @Binding var region: MKCoordinateRegion
+
+    var body: some View {
+        let binding = Binding(
+            get: { self.region },
+            set: { newValue in
+                DispatchQueue.main.async {
+                    self.region = newValue
+                }
+            }
+        )
+        return Map(coordinateRegion: binding, showsUserLocation: true)
+            .ignoresSafeArea()
     }
 }
 
