@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct WaitingView: View {
     @State var isAnimating: Bool = true
+    @State var distance : Double = 0.0
+    @State var isWaitingDone = false
+    @ObservedObject var selectedStation: selectedStationVM
     var body: some View {
         ZStack{
             Circle()
@@ -37,12 +41,37 @@ struct WaitingView: View {
                     .easeInOut(duration: 1)
                     .repeatForever(autoreverses:true)
                     , value: 1)
+            VStack{
+                Text("\(selectedStation.get()[0].name)역까지")
+                Text("\(String(format: "%.3f", distance)) km 남았습니다")
+            }
+            .font(.system(size: 30))
+        }
+        .onAppear{
+            calcDistance()
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+                print("calculating...")
+                calcDistance()
+            }
         }
     }
+    func calcDistance(){
+        let curLocation = CLLocationCoordinate2D(latitude: locationInfo.get().center.latitude, longitude: locationInfo.get().center.longitude)
+        let desLocation = CLLocationCoordinate2D(latitude: selectedStation.get()[0].lat, longitude: selectedStation.get()[0].lng)
+        distance = Double(curLocation.distance(to : desLocation)/1000)
+    }
 }
-
+extension CLLocationCoordinate2D {
+    
+    /// Returns the distance between two coordinates in meters.
+    func distance(to: CLLocationCoordinate2D) -> CLLocationDistance {
+        MKMapPoint(self).distance(to: MKMapPoint(to))
+    }
+    
+}
 struct WaitingView_Previews: PreviewProvider {
     static var previews: some View {
-        WaitingView()
+        let selStation = selectedStationVM()
+        WaitingView(selectedStation: selStation)
     }
 }

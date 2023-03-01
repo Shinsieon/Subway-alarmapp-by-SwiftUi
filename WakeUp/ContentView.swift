@@ -6,6 +6,25 @@
 //
 
 import SwiftUI
+import MapKit
+
+class LocationInfo{
+    var curLocation : MKCoordinateRegion
+    init(){
+        curLocation = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914),
+            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+    }
+    func get() -> MKCoordinateRegion{
+        return self.curLocation
+    }
+    
+    func set(_loc : MKCoordinateRegion) {
+        curLocation = _loc
+    }
+}
+
+var locationInfo = LocationInfo()
 
 struct ContentView: View {
     @State private var splashShow : Bool = true
@@ -13,6 +32,7 @@ struct ContentView: View {
     @State private var selectedTime : String = "5분"
     @State private var selectedType : String = "소리"
     @State private var showStations = false
+    @State private var goToWaitingView = false
     @ObservedObject var selectedStation = selectedStationVM()
     @State private var selectedStationText = "도착역을 지정해주세요"
     var timeArray = ["5분","10분","15분","20분","25분","30분"]
@@ -29,7 +49,9 @@ struct ContentView: View {
                         .font(.system(size: 35, weight: .heavy))
                         .onAppear(){
                             withAnimation(.easeIn(duration: 1)){
-                                fadeIn.toggle()
+                                if(fadeIn==false) {
+                                    fadeIn.toggle()
+                                }
                             }
                         }
                         .opacity(fadeIn ? 1 : 0)
@@ -67,13 +89,18 @@ struct ContentView: View {
                         .pickerStyle(.segmented)
                     }
                     Spacer()
-                    Button("시작", action:{
-                        if selectedStation.get().count==0{
-                            toast = FancyToast(type: .info, title: "Info", message: "도착역을 지정해주세요")
-                        }
-                    })
-                    .buttonStyle(startButtonStyle())
-                    .padding()
+                    NavigationLink(destination: WaitingView(selectedStation: selectedStation), isActive: $goToWaitingView){
+                        Button("시작", action:{
+                            if selectedStation.get().count==0{
+                                toast = FancyToast(type: .info, title: "Info", message: "도착역을 지정해주세요")
+                            }else{
+                                self.goToWaitingView.toggle()
+                                fadeIn = true
+                            }
+                        })
+                        .buttonStyle(startButtonStyle())
+                        .padding()
+                    }
                     Spacer()
                 }
                 .padding()

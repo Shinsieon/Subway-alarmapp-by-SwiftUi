@@ -8,9 +8,11 @@
 import SwiftUI
 import MapKit
 
+var mapInit = false
+var hasSetRegion = false
 struct MapView: View {
-    @State private var manager = CLLocationManager()
-    @StateObject private var managerDelegate = locationDelegate()
+    @State public var manager = CLLocationManager()
+    @StateObject public var managerDelegate = locationDelegate()
     @State var tracking : MapUserTrackingMode = .follow
     //서울 좌표(초기값)
     var body: some View {
@@ -32,9 +34,12 @@ struct MapView: View {
         .cornerRadius(15)
         .onAppear{
             manager.delegate = managerDelegate
-//            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-//                managerDelegate.updateLocation()
-//            }
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+                managerDelegate.updateLocation()
+            }
+        }
+        .onDisappear{
+            //Timer.invalidate()
         }
     }
 }
@@ -42,34 +47,36 @@ struct MapView: View {
 class locationDelegate : NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var pins : [Pin] = []
     @Published var location: CLLocation?
-    @State var hasSetRegion = false
-    @Published var region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914),
-            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-        )
+    
+    @Published var region = locationInfo.get()
+    
+        
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus ==  .authorizedWhenInUse{
-            print("Authorized")
             manager.startUpdatingLocation()
         }else{
-            print("not Authorized")
             manager.requestWhenInUseAuthorization()
         }
     }
     func updateLocation(){
-        print("update")
-        print(self.location!)
-        
+        print("updating")
         region = MKCoordinateRegion(center : self.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+        locationInfo.set(_loc : region)
+        
     }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations : [CLLocation]) {
         if let location = locations.last {
-            self.location = location
-//            if hasSetRegion == false{
-//                region = MKCoordinateRegion(center : location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
-//                hasSetRegion = true
-//            }
+            if mapInit == false {
+                self.location = location
+                updateLocation()
+                mapInit.toggle()
+            }
+            if hasSetRegion == false{
+                region = MKCoordinateRegion(center : location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+                hasSetRegion = true
+            }else{
+                
+            }
         }
         //pins.append(Pin(location:locations.last!))
     }
