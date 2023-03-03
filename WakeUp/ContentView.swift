@@ -129,20 +129,20 @@ struct ContentView: View {
                             .foregroundColor(Color("lineColor"))
                         
                         
-                        Text("어떻게 깨워드릴까요?")
-                            .font(.system(size: 25, weight: .heavy))
-                            .padding()
-                        Picker("choose alert type", selection: $selectedType){
-                            ForEach(alertTypeArray, id: \.self){
-                                Text($0)
-                            }
-                        }
-                        .pickerStyle(.segmented)
+//                        Text("어떻게 깨워드릴까요?")
+//                            .font(.system(size: 25, weight: .heavy))
+//                            .padding()
+//                        Picker("choose alert type", selection: $selectedType){
+//                            ForEach(alertTypeArray, id: \.self){
+//                                Text($0)
+//                            }
+//                        }
+//                        .pickerStyle(.segmented)
                     }
                     Spacer()
                     NavigationLink(destination: WaitingView(selectedStation: selectedStation, selectedDistance : selectedDistance), isActive: $goToWaitingView){
-                        let status = startedCalculation ? "중지" : "시작"
-                        Button(status, action:{
+                        //let status = startedCalculation ? "중지" : "시작"
+                        Button("시작", action:{
                             if selectedStation.get().count==0{
                                 toast = FancyToast(type: .info, title: "Info", message: "도착역을 지정해주세요")
                             }else{
