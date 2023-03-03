@@ -14,30 +14,43 @@ struct MapView: View {
     @State public var manager = CLLocationManager()
     @StateObject public var managerDelegate = locationDelegate()
     @State var tracking : MapUserTrackingMode = .follow
+    @State var timerInterval = 10
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     //서울 좌표(초기값)
     var body: some View {
-        ZStack{
-            AreaMap(region : $managerDelegate.region)
-                .frame(maxWidth: .infinity, maxHeight: 200)
-            Image(systemName: "location.circle.fill")
-                .onTapGesture{
+        VStack {
+            ZStack{
+                AreaMap(region : $managerDelegate.region)
+                    .frame(maxWidth: .infinity, maxHeight: 200)
+                Image(systemName: "location.circle.fill")
+                    .onTapGesture{
+                        managerDelegate.updateLocation()
+                    }
+                    .foregroundColor(Color("lineColor"))
+                    .font(.system(size : 30))
+                    .offset(x: 150, y: 70)
+                    .opacity(0.7)
+                
+                
+            }
+            .cornerRadius(15)
+            .onAppear{
+                manager.delegate = managerDelegate
+                Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { timer in
                     managerDelegate.updateLocation()
                 }
+            }
+            Text("\(timerInterval) 초 후에 현재 위치로 갱신됩니다.")
+                .font(.system(size:15))
                 .foregroundColor(Color("lineColor"))
-                .font(.system(size : 30))
-                .offset(x: 150, y: 70)
-                .opacity(0.7)
-                
-        }
-        .cornerRadius(15)
-        .onAppear{
-            manager.delegate = managerDelegate
-//            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-//                managerDelegate.updateLocation()
-//            }
-        }
-        .onDisappear{
-            //Timer.invalidate()
+                .onReceive(timer){ _ in
+                    if(timerInterval>0){
+                        timerInterval -= 1
+                    }else{
+                        managerDelegate.updateLocation()
+                        timerInterval = 10
+                    }
+                }
         }
     }
 }

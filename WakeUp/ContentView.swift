@@ -125,7 +125,7 @@ struct ContentView: View {
                         }
                         .pickerStyle(.segmented)
                         Text("목적지와 현재 위치간의 거리를 계산합니다.")
-                            .font(.system(size:12))
+                            .font(.system(size:15))
                             .foregroundColor(Color("lineColor"))
                         
                         
@@ -196,7 +196,7 @@ struct ContentView: View {
 struct inputButtonStyle : ButtonStyle{
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(width: 300, height: 50)
+            .frame(width: 100, height: 50)
             .font(.system(size:20,weight: .heavy))
             .background(Color("viewTitleButtonColor"))
             .foregroundColor(Color.white)
@@ -219,7 +219,7 @@ struct startButtonStyle : ButtonStyle{
             .foregroundStyle(LinearGradient(colors : [.blue, .indigo], startPoint: .top,endPoint: .bottom))
             .padding()
             .scaleEffect(configuration.isPressed ? 0.9:1)
-            .background(.ultraThinMaterial, in : RoundedRectangle(cornerRadius: 25, style: .continuous))
+            .background(.ultraThinMaterial, in : RoundedRectangle(cornerRadius: 40, style: .continuous))
     }
 }
 

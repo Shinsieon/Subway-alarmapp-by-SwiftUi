@@ -50,18 +50,17 @@ struct WaitingView: View {
                     Text("\(selectedStation.get()[0].name)역까지")
                     Text("\(String(format: "%.3f", distance)) km 남았습니다")
                     
-                    Text(isArrived ? "\(selectedDistance) 전에 깨워드릴게요" : "asd")
-                            .font(.system(size:15))
-                            .foregroundColor(Color("lineColor"))
-                            .onReceive(timer) { _ in
-                                if(isAlarmOn == true){
-                                    AudioServicesPlaySystemSound(SystemSoundID(1322))
-                                }
+                    Text(!isArrived ? "\(selectedDistance) 전에 깨워드릴게요" : "지정하신 반경 내에 도착했어요")
+                        .font(.system(size:15))
+                        .foregroundColor(Color("lineColor"))
+                        .onReceive(timer) { _ in
+                            if(isAlarmOn == true){
+                                AudioServicesPlaySystemSound(SystemSoundID(1322))
                             }
-                    }
+                        }
                     Button("중지" , action : {
                         self.isAlarmOn = false
-                    })
+                    }).buttonStyle(inputButtonStyle())
                 }else{
                     Text("목적지 정보가 \n     없습니다")
                         .font(.system(size: 30, weight: .heavy))
@@ -69,6 +68,8 @@ struct WaitingView: View {
                 }
             }
             .font(.system(size: 20))
+            
+                
         }
         .onAppear{
             calcDistance()
