@@ -86,15 +86,14 @@ class locationDelegate : NSObject, ObservableObject, CLLocationManagerDelegate{
         }
     }
     func updateLocation(){
-        print("updating")
         region = MKCoordinateRegion(center : self.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
         locationInfo.set(_loc : region)
         
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations : [CLLocation]) {
         if let location = locations.last {
+            self.location = location
             if mapInit == false {
-                self.location = location
                 updateLocation()
                 mapInit.toggle()
             }
